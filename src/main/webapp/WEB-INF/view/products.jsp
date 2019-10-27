@@ -9,9 +9,11 @@
 
 <body>
 
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<br>
+
 <c:url value="/products/create" var="createUrl">
-    <%-- Нам нужно указать, продукт какой категории мы создаем --%>
-    <c:param name="categoryId" value="${category.id}"/>
 </c:url>
 <a href="${createUrl}">Create new Product</a>
 

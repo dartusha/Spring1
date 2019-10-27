@@ -7,6 +7,10 @@
 </head>
 <body>
 
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<br>
+
 <form action="${action}" method="post">
     <%-- Очень часто применяемый способ передачи id через форму --%>
     <input type="hidden" name="id" id="id" value="${customer.id}">
@@ -16,27 +20,6 @@
     </p>
     <input type="submit" />
 </form>
-
-<c:url value="/products/create" var="createUrl">
-    <%-- Нам нужно указать, продукт какой категории мы создаем --%>
-    <c:param name="customerId" value="${customer.id}"/>
-</c:url>
-<a href="${createUrl}">Create customers</a>
-
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>FIO</th>
-    </tr>
-
-    <c:forEach items="${customers}" var="cust">
-        <tr>
-            <td>${cust.id}</td>
-            <td>${cust.fio}</td>
-        </tr>
-    </c:forEach>
-
-</table>
 
 </body>
 </html>

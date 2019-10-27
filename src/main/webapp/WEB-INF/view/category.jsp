@@ -7,6 +7,10 @@
 </head>
 <body>
 
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<br>
+
 <form action="${action}" method="post">
     <%-- Очень часто применяемый способ передачи id через форму --%>
     <input type="hidden" name="id" id="id" value="${category.id}">

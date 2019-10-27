@@ -3,10 +3,13 @@
 
 <html>
 <head>
-    <title>First Spring MVC View</title>
+    <title>Categories</title>
 </head>
 <body>
 
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<br>
 <a href="create">Create new Category</a>
 
 <table border="1">
