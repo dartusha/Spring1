@@ -2,7 +2,6 @@ package com.geekbrains.controller;
 
 import com.geekbrains.persistence.CategoryRepository;
 import com.geekbrains.persistence.ProductRepository;
-import com.geekbrains.persistence.entity.Category;
 import com.geekbrains.persistence.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +36,7 @@ public class ProductController {
                            @RequestParam(name = "priceOpt", required = false) String priceOpt,
                            @RequestParam(name = "pageId", required = false) Integer pageId,
                            Model model) {
-      //  model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         if (categoryId == null || categoryId == -1) {
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("size",
@@ -48,7 +47,7 @@ public class ProductController {
                     Math.ceil((double)productRepository.getAllByCategory_Id(categoryId).size()/recsPerPage));
         }
 
-        //Постраничная фильтрация
+        //2. Постраничная фильтрация
         if (pageId == null){
         }
         else {
@@ -86,20 +85,22 @@ public class ProductController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String createProductFrom(@RequestParam("categoryId") Long categoryId, Model model) {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalStateException("Category not found"));
+    public String createProductFrom(Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+       // Category category = categoryRepository.findById(categoryId)
+      //          .orElseThrow(() -> new IllegalStateException("Category not found"));
         Product product = new Product();
-        product.setCategory(category);
+      //  product.setCategory(category);
         model.addAttribute("product", product);
         return "product";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String createProduct(@ModelAttribute("product") Product product) {
-        product.setCategory(categoryRepository.findById(product.getCategoryId())
+    public String createProduct(@RequestParam(name = "categoryId", required = false) Long categoryId,
+            @ModelAttribute("product") Product product) {
+        product.setCategory(categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalStateException("Category not found")));
         productRepository.save(product);
-        return "redirect:/categories/edit?id=" + product.getCategory().getId();
+        return "redirect:/products";
     }
 }
