@@ -48,7 +48,7 @@ public class ProductController {
                     Math.ceil((double)productRepository.getAllByCategory_Id(categoryId).size()/recsPerPage));
         }
 
-        //Постраничная фильтрация
+        //2. Постраничная фильтрация
         if (pageId == null){
         }
         else {
