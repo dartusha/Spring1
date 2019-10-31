@@ -8,10 +8,10 @@
 
 <a href="/geek_spring_start_war/">Home</a>
 <br>
+<a href="/geek_spring_start_war/products">Back</a>
 <br>
 
-<c:url value="/products/create" var="createUrl"/>
-<form action="${createUrl}" method="post">
+<form th:object="${product}" th:action="@{/products/save}" method="post">
     <%-- Очень часто применяемый способ передачи id через форму --%>
     <input type="hidden" name="id" id="id" value="${product.id}">
 

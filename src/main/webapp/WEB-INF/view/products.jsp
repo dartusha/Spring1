@@ -16,8 +16,8 @@
 <c:url value="/products/create" var="createUrl">
 </c:url>
 <a href="${createUrl}">Create new Product</a>
-
-
+<br>
+<br>
 
 <table border="1">
     <tr>
@@ -29,7 +29,7 @@
     </tr>
 
     <form action="" method="get">
-        <label for="categoryFilter">Category filter</label>
+        <label for="categoryFilter">Category filter  </label>
         <select id="categoryFilter" name="categoryId">
             <option value="${-1}" ${param['categoryId'] == null || param['categoryId'] == -1 ? 'selected' : ''}></option>
             <c:forEach items="${categories}" var="category">
@@ -41,18 +41,15 @@
     <br>
 
     <form action="" method="get">
-        <label for="priceFilter">Price filter  </label>
-        <select id="priceFilter" name="priceOpt">
-            <option id="opt1">Minimum price</option>
-            <option id="opt2">Maximum price</option>
-            <option id="opt3">Min and Max price</option>
-            <option id="opt4">All</option>
-        </select>
-        <input type="submit" value="Apply" />
+        <label for="priceMin">Min Price  </label>
+        <input type="number" id="priceMin" name="priceMin" />
+        <label for="priceMin">Max Price </label>
+        <input type="number" id="priceMax" name="priceMax" />
+        <input type="submit" value="Filter" />
     </form>
 
     <form action="" method="get">
-        <label for="pageFilter">  Page filter</label>
+        <label for="pageFilter">  Page filter  </label>
         <select id="pageFilter" name="pageId">
             <c:forEach begin="1" end="${size}" var="i">
                 <option>${i}</option>
@@ -63,9 +60,16 @@
 
     <c:forEach items="${products}" var="prod">
         <tr>
+            <c:url value="/products/edit" var="editUrl">
+                <c:param name="id" value="${prod.id}"/>
+                <c:param name="categoryId" value="${prod.category.id}"/>
+            </c:url>
+
             <td>${prod.id}</td>
 
-            <td>${prod.name}</td>
+            <td>
+                <a href="${editUrl}">${prod.name}</a>
+            </td>
 
             <td>${prod.description}</td>
 

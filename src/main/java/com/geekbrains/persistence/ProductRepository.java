@@ -22,5 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " or p.price in (select min(p2.price+0) from Product p2)")
     List<Product> findMinMaxPrice();
 
+    @Query("select p from Product p where p.price between ?1 and ?2")
+    List<Product> findMinMaxDiap(BigDecimal priceMin, BigDecimal priceMax);
+
 
 }
