@@ -49,9 +49,10 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createCategory(@ModelAttribute("category") Category category) {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
+
 }
