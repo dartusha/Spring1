@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<a href="/geek_spring_start_war/products">Back</a>
+<br>
+
+<head>
+    <title>Product</title>
+</head>
+<body>
+<form th:object="${product}" th:action="@{/products/save}" method="post">
+    <!-- Очень часто применяемый способ передачи id через форму -->
+    <input type="hidden" name="id" id="id" th:field="*{id}">
+    <p>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" th:field="*{name}"/>
+    </p>
+    <p>
+        <label for="description">Description</label>
+        <input type="text" id="description" name="description" th:field="*{description}"/>
+    </p>
+    <p>
+        <label for="categoryId">Category</label>
+        <select th:field="*{category.id}"  id="categoryId">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+
+    </p>
+    <p>
+        <label for="price">Price</label>
+        <input type="text" id="price" name="price" th:field="*{price}"/>
+    </p>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

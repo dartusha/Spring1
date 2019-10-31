@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Products</title>
+</head>
+
+<body>
+<a href="/geek_spring_start_war/">Home</a>
+<br>
+<br>
+
+<a th:href="@{/products/create}">Create new Product</a>
+<br>
+
+<form th:action="@{/products}" th:object="${product}">
+
+    <label for="priceMin">Min Price  </label>
+    <input name="priceMin" id="priceMin" type="number"/>
+    <label for="priceMax">Max Price </label>
+    <input name="priceMax" id="priceMax" type="number"/>
+    <input type="submit" value="Filter" />
+
+    <div class="pagination" th:each="pageNumber : ${#numbers.sequence(1,{size},1)}">
+        <a th:href="@{/products(pageId=${pageNumber})}"
+           th:text=${pageNumber}>
+         </a>
+    </div>
+
+</form>
+
+
+
+
+<table border="1" th:unless="${products.size() == 0}">
+
+<tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Price</th>
+</tr>
+
+
+<tr th:each="product : ${products}">
+    <td th:text="${product.id}">1</td>
+
+    <td>
+        <a th:href="@{/products/edit?id={id}&categoryId={categoryId}(id=${product.id}, categoryId=${product.category.id})}"
+           th:text="${product.name}">Product</a>
+    </td>
+
+    <td th:text="${product.description}">Description</td>
+
+    <td th:text="${product.category.name}">Category</td>
+
+    <td th:text="${product.price}">Price</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>
