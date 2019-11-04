@@ -28,28 +28,20 @@ public class CustomerController {
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createCategoryFrom(Model model) {
-        model.addAttribute("category", new Customer());
-        model.addAttribute("action", "create");
+        model.addAttribute("customer", new Customer());
         return "customer";
-    }
-
-    @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String createCategory(@ModelAttribute("customer") Customer customer) {
-        customerRepository.save(customer);
-        return "redirect:/customers";
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     public String editForm(@RequestParam("id") Long id, Model model) {
-        Customer customer= customerRepository.findById(id)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Customer not found"));
         model.addAttribute("customer", customer);
-        model.addAttribute("action", "edit");
         return "customer";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String editForm(@ModelAttribute("customer") Customer customer) {
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public String saveForm(@ModelAttribute("customer") Customer customer) {
         customerRepository.save(customer);
         return "redirect:/customers";
     }

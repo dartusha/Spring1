@@ -16,6 +16,12 @@ public class ProductRepr {
 
     private String categoryName;
 
+    private Integer currentPage;
+
+    private Integer pageSize;
+
+    private Integer pageCount;
+
     public ProductRepr() {
     }
 
@@ -75,4 +81,37 @@ public class ProductRepr {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public Integer getPrevPage() {
+        return currentPage == 0 ? 0 : currentPage - 1;
+    }
+
+    public Integer getNextPage() {
+        return currentPage == pageCount - 1 ? currentPage : currentPage + 1;
+    }
+
 }
