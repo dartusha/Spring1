@@ -3,6 +3,7 @@ package com.geekbrains.service;
 import com.geekbrains.persistence.CategoryRepository;
 import com.geekbrains.persistence.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +38,16 @@ public class CategoryService {
     @Transactional
     public void save(Category category) {
         categoryRepository.save(category);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Category> findOne(Long id) {
+        return categoryRepository.findOne(id);
+    }
+
+    @Transactional
+    @Modifying
+    public void delete(Long id) {
+        categoryRepository.deleteById(id);
     }
 }
