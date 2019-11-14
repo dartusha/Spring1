@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Transactional
     @Modifying
@@ -17,4 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Modifying
     @Query("update Customer c set c.fio=:fio where c.id = :id")
     void update(@Param("id") Long id,@Param("fio") String fio);
+
+    @Query("select c from Customer c where c.login = :login")
+    Optional<Customer> getCustomerbyLogin(@Param("login") String login);
 }
