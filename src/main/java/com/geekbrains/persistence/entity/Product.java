@@ -32,9 +32,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description) {
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
+        this.price = price;
     }
 
     public Long getId() {

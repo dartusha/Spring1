@@ -1,5 +1,7 @@
 package com.geekbrains.controller;
 
+import com.geekbrains.persistence.CategoryRepository;
+import com.geekbrains.persistence.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.geekbrains.persistence.CategoryRepository;
-import com.geekbrains.persistence.entity.Category;
 
 @Controller
 @RequestMapping("categories")
@@ -24,7 +24,7 @@ public class CategoryController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String allCategories(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-        return "categories";
+        return "categories.html";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
@@ -49,9 +49,10 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createCategory(@ModelAttribute("category") Category category) {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
+
 }

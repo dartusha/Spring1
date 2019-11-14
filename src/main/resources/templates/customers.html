@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<a href="/">Home</a>
+<br>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+
+    <title>Customers</title>
+</head>
+<body>
+<a th:href="@{/customers/create}">Create new Customer</a>
+
+
+    <table border="1" th:unless="${customers.size() == 0}">
+        <tr>
+            <th>Id</th>
+            <th>FIO</th>
+        </tr>
+
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}">1</td>
+
+            <td>
+                <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.fio}">Customer</a>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</body>
+</html>
