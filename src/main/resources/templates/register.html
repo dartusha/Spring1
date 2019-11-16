@@ -44,6 +44,11 @@
         <div class="col-12">
             <form th:action="@{/register}" method="post" th:object="${customer}">
                 <div class="form-group">
+                    <label>FIO</label>
+                    <input type="text" class="form-control" th:field="*{fio}" placeholder="Enter FIO">
+                    <small class="text-danger" th:each="err: ${#fields.errors('login')}" th:text="${err}"></small>
+                </div>
+                <div class="form-group">
                     <label>User name</label>
                     <input type="text" class="form-control" th:field="*{login}" placeholder="Enter user name">
                     <small class="text-danger" th:each="err: ${#fields.errors('login')}" th:text="${err}"></small>

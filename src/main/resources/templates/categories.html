@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <a href="/">Home</a>
 <br>
@@ -19,8 +20,12 @@
 </head>
 
 <body>
+<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+    <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+</form>
 
-<a th:href="@{/categories/create}">Create new Category</a>
+<a th:href="@{/admin/categories/create}">Create new Category</a>
 
 <table border="1" th:unless="${categories.size() == 0}">
     <tr>
@@ -33,7 +38,7 @@
         <td th:text="${category.id}">1</td>
 
         <td>
-            <a th:href="@{/categories/edit?id={id}(id=${category.id})}" th:text="${category.name}">Product</a>
+            <a th:href="@{/admin/categories/edit?id={id}(id=${category.id})}" th:text="${category.name}">Product</a>
         </td>
 
         <td th:text="${category.description}">Description</td>

@@ -1,5 +1,8 @@
 package com.geekbrains.persistence.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +22,7 @@ public class Customer {
     @Column
     private String password;
 
+    private Long role;
 
     public Customer() {
     }

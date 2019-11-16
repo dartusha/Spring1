@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <a href="/">Home</a>
 <br>
@@ -18,7 +19,13 @@
     <title>Customers</title>
 </head>
 <body>
-<a th:href="@{/customers/create}">Create new Customer</a>
+<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+    <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+</form>
+
+
+<a th:href="@{/admin/customers/create}">Create new Customer</a>
 
 
     <table border="1" th:unless="${customers.size() == 0}">
@@ -31,7 +38,7 @@
             <td th:text="${customer.id}">1</td>
 
             <td>
-                <a th:href="@{/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.fio}">Customer</a>
+                <a th:href="@{/admin/customers/edit?id={id}(id=${customer.id})}" th:text="${customer.fio}">Customer</a>
             </td>
 
         </tr>

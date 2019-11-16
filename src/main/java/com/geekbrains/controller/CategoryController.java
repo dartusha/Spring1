@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("categories")
+@RequestMapping("admin/categories")
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
@@ -46,13 +46,13 @@ public class CategoryController {
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String editForm(@ModelAttribute("category") Category category) {
         categoryRepository.save(category);
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createCategory(@ModelAttribute("category") Category category) {
         categoryRepository.save(category);
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 
 }

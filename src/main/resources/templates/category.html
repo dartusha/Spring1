@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <a href="/">Home</a>
 <br>
-<a href="/categories">Back</a>
+<a href="/admin/categories">Back</a>
 <br>
 
 <head>
@@ -21,7 +22,13 @@
 </head>
 <body>
 
-<form th:object="${category}" th:action="@{/categories/save}" method="post">
+<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+    <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+</form>
+
+
+<form th:object="${category}" th:action="@{/admin/categories/save}" method="post">
     <!-- Очень часто применяемый способ передачи id через форму -->
     <input type="hidden" name="id" id="id" th:field="*{id}">
     <p>

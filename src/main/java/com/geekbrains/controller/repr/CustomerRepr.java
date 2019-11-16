@@ -15,6 +15,12 @@ public class CustomerRepr {
     @NotEmpty
     private String matchingPassword;
 
+    @NotEmpty
+    private String fio;
+
+    private String role;
+
+
     public CustomerRepr() {
     }
 
@@ -50,13 +56,30 @@ public class CustomerRepr {
         this.matchingPassword = matchingPassword;
     }
 
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio=fio;
+    }
+
     @Override
     public String toString() {
         return "CustomerRepr{" +
                 "id=" + id +
+                ", fio='" + fio + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", matchingPassword='" + matchingPassword + '\'' +
                 '}';
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

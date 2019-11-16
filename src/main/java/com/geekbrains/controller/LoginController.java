@@ -5,6 +5,8 @@ import com.geekbrains.persistence.entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +54,10 @@ public class LoginController {
             return "register";
         }
 
-        Customer customer=new Customer(customerRepr.getLogin(),customerRepr.getPassword());
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(customerRepr.getPassword());
+
+        Customer customer=new Customer(customerRepr.getFio(),customerRepr.getLogin(),hashedPassword);
 
         customerService.save(customer);
         return "redirect:/login";

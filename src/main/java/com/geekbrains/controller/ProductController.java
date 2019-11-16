@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 
 
 @Controller
-@RequestMapping("products")
+@RequestMapping("admin/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -77,6 +77,6 @@ public class ProductController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String createProduct(@ModelAttribute("product") ProductRepr productRepr) {
         productService.save(productRepr);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 }

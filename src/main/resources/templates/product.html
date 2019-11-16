@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <!-- Required meta tags -->
@@ -17,12 +18,17 @@
 
 <a href="/">Home</a>
 <br>
-<a href="/products">Back</a>
+<a href="/admin/products">Back</a>
 <br>
 
 <body>
 
-<form th:object="${product}" th:action="@{/products/save}"  method="post">
+<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+    <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+</form>
+
+<form th:object="${product}" th:action="@{/admin/products/save}"  method="post">
 
     <input id="id" type="hidden" th:field="*{id}">
 

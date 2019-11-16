@@ -1,11 +1,30 @@
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+
+</head>
+
 <h2>TEST SHOP</h2>
+<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+    <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+</form>
+
 <ul>
-    <li><a href="/categories/">Categories</a></li>
-    <li><a href="/products/">Products</a></li>
-    <li><a href="/customers/">Customers</a></li>
+    <li><a href="/admin/categories/">Categories</a></li>
+    <li><a href="/admin/products/">Products</a></li>
+    <li><a href="/admin/customers/">Customers</a></li>
 </ul>
 </body>
 </html>

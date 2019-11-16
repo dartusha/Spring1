@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <!-- Required meta tags -->
@@ -20,11 +21,15 @@
 <br>
 <br>
 
-<a th:href="@{/products/new}">Create new Product</a>
+<a th:href="@{/admin/products/new}">Create new Product</a>
 <br>
 
 
 <div class="container">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <a sec:authorize="!isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
+            <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+        </form>
 
     <form id="filterForm" action="" method="get" th:object="${filter}">
         <label for="categoryId">Category filter</label>
@@ -63,7 +68,7 @@
         <tr th:each="prod : ${products}">
             <td th:text="${prod.id}">1</td>
 
-            <td><a th:href="@{/products/edit(id=${prod.id})}" th:text="${prod.name}">Product name</a></td>
+            <td><a th:href="@{/admin/products/edit(id=${prod.id})}" th:text="${prod.name}">Product name</a></td>
 
             <td th:text="${prod.price}">123</td>
 

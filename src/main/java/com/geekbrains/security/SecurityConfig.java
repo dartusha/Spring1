@@ -23,6 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Autowired
+    public void setUserAuthService(UserDetailsService customerAuthService){
+        this.userDetailsService=customerAuthService;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -33,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/admin/*").authenticated()
+               // .antMatchers("/").hasAnyRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
